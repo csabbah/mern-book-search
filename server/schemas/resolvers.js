@@ -17,9 +17,8 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
 
-    books: async (parent, { author }) => {
-      const params = author ? { author } : {};
-      return Book.find(params).sort({ createdAt: -1 });
+    books: async (parent) => {
+      return Book;
     },
     book: async (parent, { _id }) => {
       return Book.findOne({ _id });
