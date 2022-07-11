@@ -8,14 +8,13 @@ export const GET_ME = gql`
       email
       savedBooks {
         _id
-        bookId: String
-        author: [String]
-        title: String
-        description: String
-        image: String
-        link: String
+        bookId
+        author
+        title
+        description
+        image
+        link
       }
-      
     }
   }
 `;
