@@ -16,7 +16,6 @@ import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 
-import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 
 const SearchBooks = () => {
@@ -28,18 +27,22 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
+  // const [saveBook, { error }] = useMutation(SAVE_BOOK);
+
   const [saveBook, { error }] = useMutation(SAVE_BOOK, {
     // The below block ensures that as soon as the user saves a book, it appears right away in the saved books page
     update(cache, { data: { saveBook } }) {
       try {
-        const { me } = cache.readQuery({ query: GET_ME });
+        const { me } = cache.readQuery({
+          query: GET_ME,
+        });
         cache.writeQuery({
           query: GET_ME,
-          data: { me: { ...me, savedBooks: [...me.savedBooks, saveBook] } },
+          data: {
+            me: { ...me, savedBooks: [...me.savedBooks, saveBook.savedBooks] },
+          },
         });
-      } catch (e) {
-        console.warn('First Book insertion by user!');
-      }
+      } catch (e) {}
     },
   });
 
@@ -86,7 +89,7 @@ const SearchBooks = () => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
-    // get token
+    // get tokens
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
@@ -99,8 +102,9 @@ const SearchBooks = () => {
 
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      saveBookIds(savedBookIds);
     } catch (err) {
-      console.log(error.networkError.result.errors);
+      // console.log(error.networkError.result.errors);
 
       console.error(err);
     }

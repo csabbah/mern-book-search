@@ -7,21 +7,14 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
-          .select('-__v -password')
-          .populate('books');
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          '-__v -password'
+        );
 
         return userData;
       }
 
       throw new AuthenticationError('Not logged in');
-    },
-
-    books: async (parent) => {
-      return Book;
-    },
-    book: async (parent, { _id }) => {
-      return Book.findOne({ _id });
     },
   },
   Mutation: {
