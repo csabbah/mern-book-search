@@ -178,7 +178,12 @@ const SearchBooks = () => {
                         : 'Save this Book!'}
                     </Button>
                   )}
-                  <a id="link" href={book.link}>
+                  <a
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    id="link"
+                    href={book.link}
+                  >
                     {book.link == null ? 'No link available' : 'Link to google'}
                   </a>
                 </Card.Body>
