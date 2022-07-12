@@ -47,9 +47,7 @@ const SearchBooks = () => {
             },
           },
         });
-      } catch (e) {
-        console.error(e);
-      }
+      } catch (e) {}
     },
   });
 

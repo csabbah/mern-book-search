@@ -37,6 +37,16 @@ const SavedBooks = () => {
 
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
+      document.getElementById(bookId).remove();
+      let counterEl = document.getElementById('counter');
+      let currentNum = parseInt(counterEl.innerText.split(' ')[1]);
+      if (currentNum === 1) {
+        return (counterEl.innerText = 'You have no saved books!');
+      } else {
+        counterEl.innerText = `Viewing ${currentNum - 1} saved ${
+          currentNum === 1 ? 'book' : 'books'
+        }`;
+      }
     } catch (err) {
       console.error(err);
     }
@@ -55,7 +65,7 @@ const SavedBooks = () => {
         </Container>
       </Jumbotron>
       <Container>
-        <h2>
+        <h2 id="counter">
           {userData.savedBooks.length
             ? `Viewing ${userData.savedBooks.length} saved ${
                 userData.savedBooks.length === 1 ? 'book' : 'books'
