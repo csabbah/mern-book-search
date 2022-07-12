@@ -36,18 +36,25 @@ const SearchBooks = () => {
         const { me } = cache.readQuery({
           query: GET_ME,
         });
+
         cache.writeQuery({
           query: GET_ME,
           data: {
-            me: { ...me, savedBooks: [...me.savedBooks, saveBook.savedBooks] },
+            me: {
+              ...me,
+              savedBooks: [
+                ...me.savedBooks,
+                saveBook.savedBooks[saveBook.savedBooks.length - 1],
+              ],
+            },
           },
         });
-      } catch (e) {}
+      } catch (e) {
+        console.log('hi');
+      }
     },
   });
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
