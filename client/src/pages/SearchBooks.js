@@ -27,8 +27,6 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
-  // const [saveBook, { error }] = useMutation(SAVE_BOOK);
-
   const [saveBook, { error }] = useMutation(SAVE_BOOK, {
     // The below block ensures that as soon as the user saves a book, it appears right away in the saved books page
     update(cache, { data: { saveBook } }) {
@@ -50,7 +48,7 @@ const SearchBooks = () => {
           },
         });
       } catch (e) {
-        console.log('hi');
+        console.error(e);
       }
     },
   });
@@ -78,6 +76,7 @@ const SearchBooks = () => {
 
       const bookData = items.map((book) => ({
         bookId: book.id,
+        link: book.volumeInfo.previewLink,
         authors: book.volumeInfo.authors || ['No author to display'],
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
@@ -165,6 +164,7 @@ const SearchBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
+
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedBookIds?.some(
@@ -180,6 +180,9 @@ const SearchBooks = () => {
                         : 'Save this Book!'}
                     </Button>
                   )}
+                  <a id="link" href={book.link}>
+                    {book.link == null ? 'No link available' : 'Link to google'}
+                  </a>
                 </Card.Body>
               </Card>
             );

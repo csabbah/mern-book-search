@@ -22,6 +22,7 @@ const SavedBooks = () => {
   const [deleteBook, { error }] = useMutation(REMOVE_BOOK);
 
   const userData = data?.me || {};
+
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -76,6 +77,9 @@ const SavedBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
+                  <a id="link" href={book.link}>
+                    {book.link == null ? 'No link available' : 'Link to google'}
+                  </a>
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteBook(book.bookId)}
