@@ -15,7 +15,7 @@
 
 ## Description
 
-This application was...
+This MERN stack application is a multi page book search engine that allows users to search up books, view their detailed information and save them (which they can view in the saved books page). Using Apollo Client, MongoDB and Mongoose, all transactions made are saved and stored accordingly. Finally, this app implements high level authentication using tokens and JTW-decode to allow for secure access and unique data specific to each users.
 
 ## Installation
 
@@ -59,6 +59,7 @@ npm run develop
 - Node.js
 - Bcrypt
 - Faker
+- localStorage
 - JSX / JavaScript
 - HTML
 - CSS
