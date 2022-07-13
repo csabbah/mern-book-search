@@ -76,3 +76,6 @@ If you have questions about this application or general inquiry, please reach ou
 ## License
 
 This project is covered under the MIT License.
+
+<img width="1640" alt="Previe" src="https://user-images.githubusercontent.com/91699101/178625203-986006e4-2c55-4518-963d-64d21ca73488.png">
+
