@@ -7,6 +7,7 @@ mongoose.connect(
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false,
+    dbName: "all-saved-books",
   }
 );
 
